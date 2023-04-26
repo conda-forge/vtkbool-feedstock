@@ -11,7 +11,7 @@ source:
     - modify-cmakelists.patch  # patch cmakelists to support building in conda env
 
 build:
-  number: 0
+  number: 1
   run_exports:
     - {{ pin_subpackage('vtkbool', max_pin='x.x.x') }}
 

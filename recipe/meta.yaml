@@ -1,4 +1,4 @@
-{% set version = "2.9" %}
+{% set version = "2.9.5" %}
 
 package:
   name: vtkbool
@@ -6,12 +6,12 @@ package:
 
 source:
   url: https://github.com/zippy84/vtkbool/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 185a72d8c6f2da18b21e1f855fffa8140d72b4fa598565020ec783ceec1e4e9e
+  sha256: 2b197792f5033f06767574fe1129088a40657eab79e238c25d8aa515e960e067
   patches:
     - modify-cmakelists.patch  # patch cmakelists to support building in conda env
 
 build:
-  number: 3
+  number: 0
   run_exports:
     - {{ pin_subpackage('vtkbool', max_pin='x.x.x') }}
 

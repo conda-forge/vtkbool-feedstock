@@ -1,14 +1,14 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 476d8fd..ac11cbd 100644
+index bcbd89a..9d8bf11 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -96,28 +96,29 @@ else()
+@@ -96,22 +96,23 @@ else()
                  MODULES ${modules}
                  PYTHON_PACKAGE "vtkbool"
                  BUILD_STATIC OFF
 -                INSTALL_HEADERS OFF)
 +                INSTALL_HEADERS OFF
-+                MODULE_DESTINATION "${VTK_PYTHON_SITE_PACKAGES_SUFFIX}")
++                MODULE_DESTINATION "${VTK_PYTHON_SITE_PACKAGES_SUFFIX}"
  
              include(CTest)
  
@@ -21,13 +21,6 @@ index 476d8fd..ac11cbd 100644
 -            set_property(TEST "import_vtkbool" APPEND PROPERTY ENVIRONMENT "PYTHONPATH=${CMAKE_BINARY_DIR}/${python_default_destination}/vtkbool")
 +            set_property(TEST "import_vtkbool" APPEND PROPERTY ENVIRONMENT "${testenv}")
  
-             add_test(NAME "generate_frieze"
-                 COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/testing/generate_frieze.py
-                 WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/testing)
- 
--            set_property(TEST "generate_frieze" APPEND PROPERTY ENVIRONMENT "PYTHONPATH=${CMAKE_BINARY_DIR}/${python_default_destination}/vtkbool")
-+            set_property(TEST "generate_frieze" APPEND PROPERTY ENVIRONMENT "${testenv}")
- 
              add_test(NAME "test_filter"
                  COMMAND ${Python3_EXECUTABLE} -m pytest
                  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/testing)
@@ -37,3 +30,12 @@ index 476d8fd..ac11cbd 100644
  
              add_executable(test_merger testing/test_merger.cxx)
              target_link_libraries(test_merger PRIVATE vtkBool ${VTK_LIBRARIES})
+@@ -129,7 +130,7 @@ else()
+                 COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/testing/generate_frieze.py
+                 WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/testing)
+ 
+-            set_property(TEST "generate_frieze" APPEND PROPERTY ENVIRONMENT "PYTHONPATH=${CMAKE_BINARY_DIR}/${python_default_destination}/vtkbool")
++            set_property(TEST "generate_frieze" APPEND PROPERTY ENVIRONMENT "${testenv}")
+ 
+         endif()
+ 

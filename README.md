@@ -11,7 +11,7 @@ Summary: A VTK-based library for boolean operations on polygonal meshes.
 
 Development: https://github.com/zippy84/vtkbool
 
-Documentation: https://github.com/zippy84/vtkbool/README.md
+Documentation: https://github.com/zippy84/vtkbool/blob/master/README.md
 
 vtkbool is a library for boolean operations on polygonal meshes,
 based on VTK. vtkbool is developed by by Ronald Römer (@zippy84).

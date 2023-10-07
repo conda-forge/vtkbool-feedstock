@@ -24,10 +24,10 @@ requirements:
     - ninja
   host:
     - python
-    - vtk
+    - vtk-base
   run:
     - python
-    - vtk
+    - vtk-base
 
 test:
   commands:

@@ -1,8 +1,4 @@
 #!/bin/sh
-set -euo pipefail
-
-rm -rf build
-
 # copy/pasted from https://github.com/conda-forge/visan-feedstock/blob/0f57597d811646486019d0beee56f39269e87e21/recipe/build.sh#L6-L27
 if test "${CONDA_BUILD_CROSS_COMPILATION}" == "1"; then
   # This wrapper script is needed for the VTK build tools when cross compiling.
@@ -27,6 +23,10 @@ _EOF
   CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_CROSSCOMPILING_EMULATOR=${PWD}/crosswrapper.sh"
 fi
 
+set -euo pipefail
+
+rm -rf build
+
 # Use bash "Remove Largest Suffix Pattern" to get rid of all but major version number
 PYTHON_MAJOR_VERSION=${PY_VER%%.*}
 
@@ -42,5 +42,5 @@ cmake ${CMAKE_ARGS} -B build -S . -G "Ninja" \
     -DPython3_ROOT_DIR=${PREFIX} \
     -DPython3_EXECUTABLE=${PREFIX}/bin/python
 
-cmake --build build -j${CPU_COUNT}
+cmake --build build -j1
 cmake --install build

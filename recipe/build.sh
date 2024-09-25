@@ -1,4 +1,38 @@
 #!/bin/sh
+
+# hotwire cmake files with latest
+if test "${CONDA_BUILD_CROSS_COMPILATION}" == "1"; then
+  HASH=a0ddeb79b6b62ff8a2c3512b92706d35a2acd150
+  curl https://gitlab.kitware.com/vtk/vtk/-/raw/$HASH/CMake/vtkModuleWrapPython.cmake \
+    > $PREFIX/lib/cmake/vtk-*/vtkModuleWrapPython.cmake
+  curl https://gitlab.kitware.com/vtk/vtk/-/raw/$HASH/CMake/vtkModule.cmake \
+    > $PREFIX/lib/cmake/vtk-*/vtkModule.cmake
+fi
+
+# copy/pasted from https://github.com/conda-forge/visan-feedstock/blob/0f57597d811646486019d0beee56f39269e87e21/recipe/build.sh#L6-L27
+if test "${CONDA_BUILD_CROSS_COMPILATION}" == "1"; then
+  # This wrapper script is needed for the VTK build tools when cross compiling.
+  # When e.g. vtkWrapPython is invoked from the target conda environment in
+  # $PREFIX, CMake will pass the command invocation to this wrapper script.
+  # We then redirect the call to the executable in the build conda environment
+  # in $BUILD_PREFIX (which will be of the proper host architecture).
+  cat << _EOF > crosswrapper.sh
+#!/bin/bash
+executable=\$1
+shift
+echo "PREFIX=\$PREFIX"
+echo "BUILD_PREFIX=\$BUILD_PREFIX"
+echo "executable=\$executable"
+if [[ \$executable == "\$PREFIX"* ]] ; then
+  executable=\$BUILD_PREFIX\${executable#\$PREFIX}
+  echo "executable=\$executable"
+fi
+\$executable \$@
+_EOF
+  chmod 755 crosswrapper.sh
+  CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_CROSSCOMPILING_EMULATOR=${PWD}/crosswrapper.sh"
+fi
+
 set -euo pipefail
 
 rm -rf build
@@ -6,7 +40,7 @@ rm -rf build
 # Use bash "Remove Largest Suffix Pattern" to get rid of all but major version number
 PYTHON_MAJOR_VERSION=${PY_VER%%.*}
 
-cmake -B build -S . -G "Ninja" \
+cmake ${CMAKE_ARGS} -B build -S . -G "Ninja" \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_PREFIX_PATH:PATH="${PREFIX}" \
     -DCMAKE_INSTALL_PREFIX:PATH="${PREFIX}" \
@@ -18,5 +52,5 @@ cmake -B build -S . -G "Ninja" \
     -DPython3_ROOT_DIR=${PREFIX} \
     -DPython3_EXECUTABLE=${PREFIX}/bin/python
 
-cmake --build build -j${CPU_COUNT}
+cmake --build build -j1
 cmake --install build

@@ -1,10 +1,12 @@
 #!/bin/sh
 
-# hotwire vtkModuleWrapPython.cmake with latest
+# hotwire cmake files with latest
 if test "${CONDA_BUILD_CROSS_COMPILATION}" == "1"; then
-    curl \
-        https://gitlab.kitware.com/vtk/vtk/-/raw/a0ddeb79b6b62ff8a2c3512b92706d35a2acd150/CMake/vtkModuleWrapPython.cmake \
-        > $PREFIX/lib/cmake/vtk-*/vtkModuleWrapPython.cmake
+  HASH=a0ddeb79b6b62ff8a2c3512b92706d35a2acd150
+  curl https://gitlab.kitware.com/vtk/vtk/-/raw/$HASH/CMake/vtkModuleWrapPython.cmake \
+    > $PREFIX/lib/cmake/vtk-*/vtkModuleWrapPython.cmake
+  curl https://gitlab.kitware.com/vtk/vtk/-/raw/$HASH/CMake/vtkModule.cmake \
+    > $PREFIX/lib/cmake/vtk-*/vtkModule.cmake
 fi
 
 # copy/pasted from https://github.com/conda-forge/visan-feedstock/blob/0f57597d811646486019d0beee56f39269e87e21/recipe/build.sh#L6-L27

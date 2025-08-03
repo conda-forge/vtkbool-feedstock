@@ -6,6 +6,12 @@ rm -rf build
 # Use bash "Remove Largest Suffix Pattern" to get rid of all but major version number
 PYTHON_MAJOR_VERSION=${PY_VER%%.*}
 
+if [[ "$(uname)" == "Darwin" ]]; then
+  export CXXFLAGS="${CXXFLAGS} -stdlib=libc++"
+  export LDFLAGS="${LDFLAGS} -lc++ -lc++abi"
+  EXTRA_CMAKE_FLAGS="-DCMAKE_CXX_FLAGS='${CXXFLAGS}' -DCMAKE_EXE_LINKER_FLAGS='${LDFLAGS}'"
+fi
+
 cmake -B build -S . -G "Ninja" \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_PREFIX_PATH:PATH="${PREFIX}" \
@@ -16,7 +22,9 @@ cmake -B build -S . -G "Ninja" \
     -DVTK_PYTHON_VERSION:STRING="${PYTHON_MAJOR_VERSION}" \
     -DPython3_FIND_STRATEGY=LOCATION \
     -DPython3_ROOT_DIR=${PREFIX} \
-    -DPython3_EXECUTABLE=${PREFIX}/bin/python
+    -DPython3_EXECUTABLE=${PREFIX}/bin/python \
+    -DCMAKE_CXX_FLAGS="-stdlib=libc++" \
+    ${EXTRA_CMAKE_FLAGS}
 
 cmake --build build -j${CPU_COUNT}
 cmake --install build

@@ -6,6 +6,7 @@ rm -rf build
 # Use bash "Remove Largest Suffix Pattern" to get rid of all but major version number
 PYTHON_MAJOR_VERSION=${PY_VER%%.*}
 
+EXTRA_CMAKE_FLAGS=""
 if [[ "$(uname)" == "Darwin" ]]; then
   export CXXFLAGS="${CXXFLAGS} -stdlib=libc++"
   export LDFLAGS="${LDFLAGS} -lc++ -lc++abi"

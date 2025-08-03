@@ -34,7 +34,6 @@ test:
   imports:
     - vtkbool
     - vtkbool.vtkbool
-    - vtkbool.vtkbool.vtkPolyDataBooleanFilter
 
 about:
   home: https://github.com/zippy84/vtkbool

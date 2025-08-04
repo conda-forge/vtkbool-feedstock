@@ -33,7 +33,7 @@ requirements:
 
 test:
   commands:
-    - python -c 'from vtkbool.vtkbool import vtkPolyDataBooleanFilter'
+    - python -c "from vtkbool.vtkbool import vtkPolyDataBooleanFilter"
   imports:
     - vtkbool
     - vtkbool.vtkbool

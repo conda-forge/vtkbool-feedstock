@@ -1,4 +1,4 @@
-{% set version = "3.0.1" %}
+{% set version = "3.2" %}
 
 package:
   name: vtkbool
@@ -6,12 +6,13 @@ package:
 
 source:
   url: https://github.com/zippy84/vtkbool/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: f72cf278f0535858704aa0ee98c5cf63df74990d02630958af19eb507675c95f
+  sha256: f8af7ecaf8ec20fefb3e3c1fe7e84490d07bd5eee89a26564424059f2bfc2eb3
   patches:
     - modify-cmakelists.patch  # patch cmakelists to support building in conda env
+    - include-sstream.patch    # add missing include
 
 build:
-  number: 4
+  number: 0
   run_exports:
     - {{ pin_subpackage('vtkbool', max_pin='x.x.x') }}
 
@@ -32,11 +33,10 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/include/vtkBoolModule.h     # [unix]
-    - test -f $PREFIX/lib/libvtkBool${SHLIB_EXT}  # [unix]
+    - python -c "from vtkbool.vtkbool import vtkPolyDataBooleanFilter"
   imports:
     - vtkbool
-    - vtkbool.vtkBool
+    - vtkbool.vtkbool
 
 about:
   home: https://github.com/zippy84/vtkbool

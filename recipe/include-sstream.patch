@@ -1,0 +1,25 @@
+diff --git a/Contact.cxx b/Contact.cxx
+index e16a417..5844036 100644
+--- a/Contact.cxx
++++ b/Contact.cxx
+@@ -23,6 +23,8 @@ limitations under the License.
+ #include <vtkTriangleStrip.h>
+ #include <vtkArrayIteratorTemplate.h>
+ 
++#include <sstream>
++
+ // #define _debA 0
+ // #define _debB 0
+ 
+diff --git a/vtkPolyDataBooleanFilter.cxx b/vtkPolyDataBooleanFilter.cxx
+index d40125c..5da7d53 100644
+--- a/vtkPolyDataBooleanFilter.cxx
++++ b/vtkPolyDataBooleanFilter.cxx
+@@ -24,6 +24,7 @@ limitations under the License.
+ #include <queue>
+ #include <memory>
+ #include <tuple>
++#include <sstream>
+ 
+ #include <chrono>
+ #include <numeric>

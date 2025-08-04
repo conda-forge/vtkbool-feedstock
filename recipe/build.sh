@@ -24,7 +24,6 @@ cmake -B build -S . -G "Ninja" \
     -DPython3_FIND_STRATEGY=LOCATION \
     -DPython3_ROOT_DIR=${PREFIX} \
     -DPython3_EXECUTABLE=${PREFIX}/bin/python \
-    -DCMAKE_CXX_FLAGS="-stdlib=libc++" \
     ${EXTRA_CMAKE_FLAGS}
 
 cmake --build build -j${CPU_COUNT}

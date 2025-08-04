@@ -10,6 +10,7 @@ source:
   patches:
     - modify-cmakelists.patch  # patch cmakelists to support building in conda env
     - include-sstream.patch    # add missing include
+    - include-sstream-2.patch  # add missing include
 
 build:
   number: 0

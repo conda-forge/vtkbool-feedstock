@@ -9,6 +9,7 @@ source:
   sha256: f8af7ecaf8ec20fefb3e3c1fe7e84490d07bd5eee89a26564424059f2bfc2eb3
   patches:
     - modify-cmakelists.patch  # patch cmakelists to support building in conda env
+    - include-sstream.patch    # add missing include
 
 build:
   number: 0

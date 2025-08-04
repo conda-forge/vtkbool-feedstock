@@ -1,0 +1,13 @@
+diff --git a/Contact.cxx b/Contact.cxx
+index e16a417..5844036 100644
+--- a/Contact.cxx
++++ b/Contact.cxx
+@@ -23,6 +23,8 @@ limitations under the License.
+ #include <vtkTriangleStrip.h>
+ #include <vtkArrayIteratorTemplate.h>
+ 
++#include <sstream>
++
+ // #define _debA 0
+ // #define _debB 0
+ 

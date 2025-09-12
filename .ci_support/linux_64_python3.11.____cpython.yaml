@@ -23,4 +23,4 @@ python:
 target_platform:
 - linux-64
 vtk:
-- 9.4.2
+- 9.5.1

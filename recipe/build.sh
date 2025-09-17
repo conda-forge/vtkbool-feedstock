@@ -6,7 +6,7 @@ rm -rf build
 # Use bash "Remove Largest Suffix Pattern" to get rid of all but major version number
 PYTHON_MAJOR_VERSION=${PY_VER%%.*}
 
-cmake -B build -S . -G "Ninja" \
+cmake ${CMAKE_ARGS} -B build -S . -G "Ninja" \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_PREFIX_PATH:PATH="${PREFIX}" \
     -DCMAKE_INSTALL_PREFIX:PATH="${PREFIX}" \

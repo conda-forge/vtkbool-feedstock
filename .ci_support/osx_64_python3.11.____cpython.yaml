@@ -25,7 +25,4 @@ python:
 target_platform:
 - osx-64
 vtk:
-- 9.5.1
-zip_keys:
-- - python
-  - channel_sources
+- 9.5.2

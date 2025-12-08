@@ -2,10 +2,8 @@ c_stdlib:
 - sysroot
 c_stdlib_version:
 - '2.17'
-cdt_name:
-- conda
 channel_sources:
-- conda-forge,conda-forge/label/python_rc
+- conda-forge
 channel_targets:
 - conda-forge main
 cxx_compiler:
@@ -23,7 +21,4 @@ python:
 target_platform:
 - linux-64
 vtk:
-- 9.5.1
-zip_keys:
-- - python
-  - channel_sources
+- 9.5.2

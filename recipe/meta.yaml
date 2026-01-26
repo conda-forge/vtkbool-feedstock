@@ -12,7 +12,7 @@ source:
     - include-sstream.patch    # add missing include
 
 build:
-  number: 3
+  number: 4
   run_exports:
     - {{ pin_subpackage('vtkbool', max_pin='x.x.x') }}
 
@@ -20,6 +20,7 @@ requirements:
   build:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - vtk                                    # [build_platform != target_platform]
     - cmake
     - {{ compiler('cxx') }}
     - {{ stdlib("c") }}

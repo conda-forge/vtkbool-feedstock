@@ -12,7 +12,7 @@ source:
     - include-sstream.patch    # add missing include
 
 build:
-  number: 4
+  number: 5
   run_exports:
     - {{ pin_subpackage('vtkbool', max_pin='x.x.x') }}
 
